@@ -2,7 +2,5 @@
 
 int main()
 {
-    std::vector<int> vec1 = {4, 7, 3, 2};
-
-    SortingAlgorithms::BubbleSortTest(vec1);
+    SortingAlgorithms::BubbleSortTest<int>();
 }
