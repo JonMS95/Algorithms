@@ -74,6 +74,7 @@ public:
     static void InsertionSort(std::vector<T>& vec)
     {
         std::cout << "Applying insertion sort ..." << std::endl;
+        
         for(auto i = 1; i < vec.size(); i++)
         {
             T key = vec[i];
@@ -87,6 +88,26 @@ public:
             }
 
             vec[j + 1] = key;
+        }
+    }
+
+    template <typename T>
+    static void SelectionSort(std::vector<T>& vec)
+    {
+        std::cout << "Applying selection sort ..." << std::endl;
+        T min_index;
+        
+        for(auto i = 0; i < vec.size() - 1; i++)
+        {
+            min_index = i;
+            
+            for(auto j = i; j < vec.size(); j++)
+            {
+                if(vec[j] < vec[min_index])
+                    min_index = j;
+            }
+
+            std::swap(vec[i], vec[min_index]);
         }
     }
 
