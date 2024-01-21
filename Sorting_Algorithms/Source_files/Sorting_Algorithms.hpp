@@ -93,7 +93,7 @@ public:
     template <typename T>
     static void SortTest(void (*SortingAlgorithm)(std::vector<T>&), int vector_num = 10, int vector_size = 100)
     {
-        std::vector<T> vec(100, 0);
+        std::vector<T> vec(vector_size, 0);
         std::vector<bool> results(vector_num, false);
 
         for(int i = 0; i < vector_num; i++)
