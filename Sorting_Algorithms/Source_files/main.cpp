@@ -2,6 +2,8 @@
 
 int main()
 {
-    SortingAlgorithms::SortTest<int>(SortingAlgorithms::BubbleSort);
-    SortingAlgorithms::SortTest<int>(SortingAlgorithms::InsertionSort);
+    int number_of_vectors = 5;
+    int vector_size = 10;
+    SortingAlgorithms::SortTest<int>(SortingAlgorithms::BubbleSort      , number_of_vectors ,   vector_size);
+    SortingAlgorithms::SortTest<int>(SortingAlgorithms::InsertionSort   , number_of_vectors ,   vector_size);
 }
