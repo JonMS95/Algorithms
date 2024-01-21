@@ -2,5 +2,6 @@
 
 int main()
 {
-    SortingAlgorithms::BubbleSortTest<int>();
+    SortingAlgorithms::SortTest<int>(SortingAlgorithms::BubbleSort);
+    SortingAlgorithms::SortTest<int>(SortingAlgorithms::InsertionSort);
 }
