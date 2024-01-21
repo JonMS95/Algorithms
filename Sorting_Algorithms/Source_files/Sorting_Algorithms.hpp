@@ -114,7 +114,7 @@ public:
             std::cout << "Test i: "<< i << " result: " << (results[i] ? "OK" : "NOK") << std::endl << std::endl;
         }
 
-        std::cout << "Overall result: " << (( results[0] == true && SortingAlgorithms::LinearSortTest(results) ) ? "OK" : "NOK") << std::endl;
+        std::cout << "Overall result: " << (( results[0] == true && SortingAlgorithms::LinearSortTest(results) ) ? "OK" : "NOK") << std::endl << std::endl;
     }
 };
 
