@@ -43,9 +43,12 @@ private:
         return true;
     }
 
+public:
     template <typename T>
     static void BubbleSort(std::vector<T>& vec)
     {
+        std::cout << "Applying bubble sort ..." << std::endl;
+
         auto vec_size = vec.size();
         bool exchanges_needed;
 
@@ -67,11 +70,31 @@ private:
         }
     }
 
-public:
     template <typename T>
-    static void BubbleSortTest(int vector_num = 10, int vector_size = 100)
+    static void InsertionSort(std::vector<T>& vec)
+    {
+        std::cout << "Applying insertion sort ..." << std::endl;
+        for(auto i = 1; i < vec.size(); i++)
+        {
+            T key = vec[i];
+
+            auto j = i - 1;
+
+            while (j >= 0 && vec[j] > key) 
+            {
+                vec[j + 1] = vec[j];
+                j = j - 1;
+            }
+
+            vec[j + 1] = key;
+        }
+    }
+
+    template <typename T>
+    static void SortTest(void (*SortingAlgorithm)(std::vector<T>&), int vector_num = 10, int vector_size = 100)
     {
         std::vector<T> vec(100, 0);
+        std::vector<bool> results(vector_num, false);
 
         for(int i = 0; i < vector_num; i++)
         {
@@ -82,13 +105,16 @@ public:
             std::cout << "Before sorting: ";
             SortingAlgorithms::PrintVector(vec);
 
-            SortingAlgorithms::BubbleSort(vec);
+            SortingAlgorithm(vec);
 
             std::cout << "After sorting: ";
             SortingAlgorithms::PrintVector(vec);
 
-            std::cout << "Test i: "<< i << " result: " << (SortingAlgorithms::LinearSortTest(vec) ? "OK" : "NOK") << std::endl << std::endl;
+            results[i] = SortingAlgorithms::LinearSortTest(vec);
+            std::cout << "Test i: "<< i << " result: " << (results[i] ? "OK" : "NOK") << std::endl << std::endl;
         }
+
+        std::cout << "Overall result: " << (( results[0] == true && SortingAlgorithms::LinearSortTest(results) ) ? "OK" : "NOK") << std::endl;
     }
 };
 
