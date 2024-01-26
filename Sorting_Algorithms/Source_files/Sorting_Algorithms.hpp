@@ -5,6 +5,7 @@
 #include <vector>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+#include "Binary_Search_Tree.hpp"
 
 class SortingAlgorithms
 {
@@ -109,6 +110,12 @@ public:
 
             std::swap(vec[i], vec[min_index]);
         }
+    }
+
+    template <typename T>
+    static void BinarySearchTreeSort(std::vector<T>& vec)
+    {
+        BinarySearchTree<int>::BSTSort(vec);
     }
 
     template <typename T>
