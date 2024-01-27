@@ -28,8 +28,6 @@ private:
     template <typename T>
     static void RandomizeVectorValues(std::vector<T>& vec, T min_value, T max_value)
     {
-        srand(time(NULL));
-
         for(int i = 0; i < vec.size(); i++)
             vec[i] = rand() % max_value + min_value;
     }
@@ -115,16 +113,22 @@ public:
     template <typename T>
     static void BinarySearchTreeSort(std::vector<T>& vec)
     {
+        std::cout << "Applying BST sort ..." << std::endl;
+
+        std::cout << "***** WARNING: The current implementation of BST does not allow storing repeated elements. Resulting vector may end up being shorter than the original. *****" << std::endl;
         BinarySearchTree<int>::BSTSort(vec);
     }
 
     template <typename T>
-    static void SortTest(void (*SortingAlgorithm)(std::vector<T>&), int vector_num = 10, int vector_size = 100)
+    static bool SortTest(void (*SortingAlgorithm)(std::vector<T>&), unsigned int vector_num = 10, unsigned int vector_size = 100)
     {
         std::vector<T> vec(vector_size, 0);
         std::vector<bool> results(vector_num, false);
+        srand(time(NULL));
 
-        for(int i = 0; i < vector_num; i++)
+        // Keep in mind that BST sort may lead the vector size to shrink as tests go by, since repeated elements are removed in the current implementation.
+
+        for(auto i = 0; i < vector_num; i++)
         {
             std::cout << "Test i: " << i << std::endl;
 
@@ -142,7 +146,11 @@ public:
             std::cout << "Test i: "<< i << " result: " << (results[i] ? "OK" : "NOK") << std::endl << std::endl;
         }
 
-        std::cout << "Overall result: " << (( results[0] == true && SortingAlgorithms::LinearSortTest(results) ) ? "OK" : "NOK") << std::endl << std::endl;
+        bool test_result = ( results[0] == true && SortingAlgorithms::LinearSortTest(results) );
+        
+        std::cout << "Overall result: " << (test_result ? "OK" : "NOK") << std::endl << std::endl;
+
+        return test_result;
     }
 };
 
