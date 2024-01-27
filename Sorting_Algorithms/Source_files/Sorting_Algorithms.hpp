@@ -11,7 +11,7 @@ class SortingAlgorithms
 {
 private:
     template <typename T>
-    static void PrintVector(std::vector<T>& vec)
+    static void PrintVector(const std::vector<T>& vec)
     {
         std::cout << "{";
 
