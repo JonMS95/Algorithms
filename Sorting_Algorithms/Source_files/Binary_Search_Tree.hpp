@@ -11,7 +11,6 @@ class BinarySearchTree
 {
 private:
     std::shared_ptr<BTNode<T>> pRoot;
-    unsigned long int vec_index;
 
     void PrintBST_Priv(std::shared_ptr<BTNode<T>> pNode)
     {
@@ -66,15 +65,10 @@ private:
         if(pNode->left != nullptr)
             this->GetBSTAsSortedVector(pNode->left, vec);
 
-        vec[this->vec_index++] = pNode->data;
+        vec.emplace_back(pNode->data);
 
         if(pNode->right != nullptr)
             this->GetBSTAsSortedVector(pNode->right, vec);
-    }
-
-    void ResetVecIndex()
-    {
-        this->vec_index = 0;
     }
 
 public:
@@ -92,9 +86,7 @@ public:
         this->pRoot = std::make_shared<BTNode<T>>(values[0]);
 
         for(auto i = 1; i < values.size(); i++)
-        {
             this->InsertNode(values[i]);
-        }
     }
 
     std::shared_ptr<BTNode<T>> GetBSTRoot(void)
@@ -114,11 +106,14 @@ public:
 
     static void BSTSort(std::vector<T>& vec)
     {
+        std::vector<T> sorted_vec;
+
         BinarySearchTree<T> bt(vec);
 
-        bt.ResetVecIndex();
+        bt.GetBSTAsSortedVector(bt.GetBSTRoot(), sorted_vec);
 
-        bt.GetBSTAsSortedVector(bt.GetBSTRoot(), vec);
+        // Keep in mind that the current implementation of this BST does not allow storing repeated elements.
+        vec = sorted_vec;
     }
 };
 
