@@ -12,7 +12,7 @@ class BinarySearchTree
 private:
     std::shared_ptr<BTNode<T>> pRoot;
 
-    void PrintBST_Priv(std::shared_ptr<BTNode<T>> pNode)
+    void PrintBST_Priv(const std::shared_ptr<BTNode<T>> pNode)
     {
         if(pNode == nullptr)
             return;
@@ -30,7 +30,7 @@ private:
         }
     }
 
-    void InsertNode_Priv(std::shared_ptr<BTNode<T>> pNode, T data)
+    void InsertNode_Priv(const std::shared_ptr<BTNode<T>> pNode, T data)
     {
         if(pNode == nullptr || pNode->data == data)
             return;
@@ -57,7 +57,7 @@ private:
         }
     }
 
-    void GetBSTAsSortedVector(std::shared_ptr<BTNode<T>> pNode, std::vector<T>& vec)
+    void GetBSTAsSortedVector(const std::shared_ptr<BTNode<T>> pNode, std::vector<T>& vec)
     {
         if(pNode == nullptr)
             return;
@@ -73,9 +73,9 @@ private:
 
 public:
     BinarySearchTree(void): pRoot(nullptr) { std::cout << "Created BT with no root." << std::endl; }
-    BinarySearchTree(T data): pRoot(std::make_shared<BTNode<T>>(data)) { std::cout << "Created BT with root == " << data << "." << std::endl; }
-    BinarySearchTree(std::shared_ptr<BTNode<T>> root): pRoot(root) { std::cout << "Created BT with root == " << pRoot->data << "." << std::endl; }
-    BinarySearchTree(std::vector<T>& values)
+    BinarySearchTree(const T data): pRoot(std::make_shared<BTNode<T>>(data)) { std::cout << "Created BT with root == " << data << "." << std::endl; }
+    BinarySearchTree(const std::shared_ptr<BTNode<T>> root): pRoot(root) { std::cout << "Created BT with root == " << pRoot->data << "." << std::endl; }
+    BinarySearchTree(const std::vector<T>& values)
     {
         if(values.size() == 0)
         {
@@ -99,7 +99,7 @@ public:
         this->PrintBST_Priv(this->pRoot);
     }
 
-    void InsertNode(T data)
+    void InsertNode(const T data)
     {
         this->InsertNode_Priv(this->pRoot, data);
     }
