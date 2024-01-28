@@ -42,6 +42,36 @@ private:
         return true;
     }
 
+    template <typename T>
+    static unsigned long int QuickSortPartition(std::vector<T>& vec, unsigned long int left, unsigned long int right)
+    {
+        T pivot = vec[left];
+
+        for(unsigned long int i = left + 1; i <= right; i++)
+        {
+            if(vec[i] < pivot)
+            {
+                std::swap(vec[i], vec[left++]);
+            }
+        }
+
+        std::swap(pivot, vec[left]);
+
+        return left;
+    }
+
+    template <typename T>
+    static void QuickSort_Priv(std::vector<T>& vec, unsigned long int left, unsigned long int right)
+    {
+        if(left < right)
+        {
+            unsigned long int pivot_index = SortingAlgorithms::QuickSortPartition(vec, left, right);
+
+            SortingAlgorithms::QuickSort_Priv(vec, left, pivot_index);
+            SortingAlgorithms::QuickSort_Priv(vec, pivot_index + 1, right);
+        }
+    }
+
 public:
     template <typename T>
     static void BubbleSort(std::vector<T>& vec)
@@ -117,6 +147,13 @@ public:
 
         std::cout << "***** WARNING: The current implementation of BST does not allow storing repeated elements. Resulting vector may end up being shorter than the original. *****" << std::endl;
         BinarySearchTree<int>::BSTSort(vec);
+    }
+
+    template <typename T>
+    static void QuickSort(std::vector<T>& vec)
+    {
+        std::cout << "Applying QuickSort ..." << std::endl;
+        SortingAlgorithms::QuickSort_Priv(vec, 0, vec.size() - 1);
     }
 
     template <typename T>
