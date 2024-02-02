@@ -11,6 +11,7 @@ int main()
     results.emplace_back(   SortingAlgorithms::SortTest<int>(SortingAlgorithms::InsertionSort           , number_of_vectors ,   vector_size)    );
     results.emplace_back(   SortingAlgorithms::SortTest<int>(SortingAlgorithms::SelectionSort           , number_of_vectors ,   vector_size)    );
     results.emplace_back(   SortingAlgorithms::SortTest<int>(SortingAlgorithms::BinarySearchTreeSort    , number_of_vectors ,   vector_size)    );
+    results.emplace_back(   SortingAlgorithms::SortTest<int>(SortingAlgorithms::QuickSortEnd            , number_of_vectors ,   vector_size)    );
     results.emplace_back(   SortingAlgorithms::SortTest<int>(SortingAlgorithms::QuickSort               , number_of_vectors ,   vector_size)    );
 
     for(auto i = 0; i < results.size(); i++)

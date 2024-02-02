@@ -43,7 +43,7 @@ private:
     }
 
     template <typename T>
-    static unsigned long int QuickSortPartition(std::vector<T>& vec, unsigned long int left, unsigned long int right)
+    static unsigned long int QuickSortEndPartition(std::vector<T>& vec, unsigned long int left, unsigned long int right)
     {
         T pivot = vec[left];
 
@@ -61,15 +61,54 @@ private:
     }
 
     template <typename T>
-    static void QuickSort_Priv(std::vector<T>& vec, unsigned long int left, unsigned long int right)
+    static void QuickSortEnd_Priv(std::vector<T>& vec, unsigned long int left, unsigned long int right)
     {
         if(left < right)
         {
-            unsigned long int pivot_index = SortingAlgorithms::QuickSortPartition(vec, left, right);
+            unsigned long int pivot_index = SortingAlgorithms::QuickSortEndPartition(vec, left, right);
 
-            SortingAlgorithms::QuickSort_Priv(vec, left, pivot_index);
-            SortingAlgorithms::QuickSort_Priv(vec, pivot_index + 1, right);
+            SortingAlgorithms::QuickSortEnd_Priv(vec, left, pivot_index);
+            SortingAlgorithms::QuickSortEnd_Priv(vec, pivot_index + 1, right);
         }
+    }
+
+    
+    template <typename T>
+    static std::pair<int, int> QuickSortPartition(std::vector<T>& vec, int left, int right)
+    {
+        int i          = left;
+        int j          = right;
+        int mid    = i + (j - i) / 2;
+        T pivot                 = vec[mid];
+
+        while(i <= j)
+        {
+            while(vec[i] < pivot)
+                i++;
+            
+            while(vec[j] > pivot)
+                j--;
+
+            if(i <= j)
+            {
+                std::swap(vec[i], vec[j]);
+                i++;
+                j--;
+            }
+        }
+
+        return {j, i};
+    }
+
+    template <typename T>
+    static void QuickSort_Priv(std::vector<T>& vec, int left, int right)
+    {
+        std::pair<int, int> boundaries = SortingAlgorithms::QuickSortPartition(vec, left, right);
+        
+        if(left < boundaries.first)
+            SortingAlgorithms::QuickSort_Priv(vec, left, boundaries.first);
+        if(right > boundaries.second)
+            SortingAlgorithms::QuickSort_Priv(vec, boundaries.second, right);
     }
 
 public:
@@ -150,9 +189,16 @@ public:
     }
 
     template <typename T>
+    static void QuickSortEnd(std::vector<T>& vec)
+    {
+        std::cout << "Applying QuickSort by using last element as pivot in each partition ..." << std::endl;
+        SortingAlgorithms::QuickSortEnd_Priv(vec, 0, vec.size() - 1);
+    }
+
+    template <typename T>
     static void QuickSort(std::vector<T>& vec)
     {
-        std::cout << "Applying QuickSort ..." << std::endl;
+        std::cout << "Applying QuickSort by using middle element as pivot in each partition ..." << std::endl;
         SortingAlgorithms::QuickSort_Priv(vec, 0, vec.size() - 1);
     }
 
