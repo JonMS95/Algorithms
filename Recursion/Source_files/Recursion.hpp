@@ -1,3 +1,6 @@
+#ifndef RECURSION_HPP
+#define RECURSION_HPP
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -20,3 +23,5 @@ public:
                                         unsigned int n                                          ,
                                         std::string function_name                               );
 };
+
+#endif
