@@ -19,6 +19,7 @@ public:
     static std::vector<int> countBits_recursive(int n);
     static int getNumOfOnes_memoization(int n, std::vector<int>& known_values);
     static std::vector<int> countBits_memoization(int n);
+    static std::vector<int> getNumOfOnes_tabulation(int n);
 };
 
 #endif
