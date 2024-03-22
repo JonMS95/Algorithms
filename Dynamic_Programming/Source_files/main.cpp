@@ -33,6 +33,11 @@ void testCountBits(int n = 16)
         std::cout << num << " ";
     std::cout << std::endl;
 
+    std::cout << "DP::getNumOfOnes_tabulation(" << n << ")" << std::endl;
+    for(int num: DP::getNumOfOnes_tabulation(n))
+        std::cout << num << " ";
+    std::cout << std::endl;
+
     std::cout << std::endl;
 }
 
