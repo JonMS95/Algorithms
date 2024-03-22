@@ -215,3 +215,22 @@ std::vector<int> DP::countBits_memoization(int n)
     
     return ret;
 }
+
+/*
+Another approach is the one based on tabulation (bottom-up). This one optimizes the iterative case.
+It is based on calculating first the simpler terms, and leaving the most complex terms (which
+require the prior ones) for the end. Same as memoization, it requires to store the terms that have
+already been calculated somewhere. 
+*/
+
+std::vector<int> DP::getNumOfOnes_tabulation(int n)
+{
+    std::vector<int> nums(n + 1);
+
+    nums[0] = 0;
+
+    for(int i = 1; i <= n; i++)
+        nums[i] = nums[i - DP::getLE2Power(i)] + 1;
+
+    return nums;
+}
