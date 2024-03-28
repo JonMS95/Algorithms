@@ -48,6 +48,17 @@ void testClimbStairs(int n = 10)
         std::cout << "DP::climbStairs_recursive(" << i << ") = " << DP::climbStairs_recursive(i) << std::endl;
         std::cout << "DP::climbStairs_memoization_driver(" << i << ") = " << DP::climbStairs_memoization_driver(i) << std::endl;
     }
+    std::cout << std::endl;
+}
+
+void testHouseRobber(void)
+{
+    std::vector<int> houses = {114,117,207,117,235,82,90,67,143,146,53,108,200,91,80,223};
+
+    std::cout << "DP::houseRobber_recursive_driver(houses) = " << DP::houseRobber_recursive_driver(houses) << std::endl;
+    std::cout << "DP::houseRobber_tabulation_driver(houses) = " << DP::houseRobber_tabulation_driver(houses) << std::endl;
+
+    std::cout << std::endl;
 }
 
 int main()
@@ -55,6 +66,7 @@ int main()
     testFibonacci();
     testCountBits();
     testClimbStairs();
+    testHouseRobber();
 
     return 0;
 }
