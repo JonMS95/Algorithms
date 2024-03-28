@@ -12,6 +12,12 @@ private:
     static int getLE2Power(int n);
     static int getNumOfOnes_recursive(int n);
 
+    static int climbStairs_memoization(int n, std::map<int, int>& known_cases);
+    
+    static int houseRobber_recursive(std::vector<int>& nums, int index);
+
+    static int houseRobber_tabulation(std::vector<int>& nums, int index, std::vector<int>& known_cases);
+
 public:
     static unsigned int fibonacci_tabulation(const unsigned int n);
     static unsigned int fibonacci_memoization(const unsigned int n);
@@ -23,8 +29,11 @@ public:
     static std::vector<int> getNumOfOnes_tabulation(int n);
 
     static int climbStairs_recursive(int n);
-    static int climbStairs_memoization(int n, std::map<int, int>& known_cases);
     static int climbStairs_memoization_driver(int n);
+
+    static int houseRobber_recursive_driver(std::vector<int>& nums);
+
+    static int houseRobber_tabulation_driver(std::vector<int>& nums);
 };
 
 #endif
