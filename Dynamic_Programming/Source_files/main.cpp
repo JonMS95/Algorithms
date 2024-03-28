@@ -41,10 +41,20 @@ void testCountBits(int n = 16)
     std::cout << std::endl;
 }
 
+void testClimbStairs(int n = 10)
+{
+    for(int i = 1; i <= 10; i++)
+    {
+        std::cout << "DP::climbStairs_recursive(" << i << ") = " << DP::climbStairs_recursive(i) << std::endl;
+        std::cout << "DP::climbStairs_memoization_driver(" << i << ") = " << DP::climbStairs_memoization_driver(i) << std::endl;
+    }
+}
+
 int main()
 {
     testFibonacci();
     testCountBits();
+    testClimbStairs();
 
     return 0;
 }
