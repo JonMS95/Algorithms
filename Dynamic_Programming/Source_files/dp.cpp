@@ -274,3 +274,69 @@ int DP::climbStairs_memoization_driver(int n)
     std::map<int, int> known_cases = {{0, 1}};
     return DP::climbStairs_memoization(n, known_cases);
 }
+
+/*
+Yet another example, based on https://leetcode.com/problems/house-robber/description/.
+*/
+int DP::houseRobber_recursive(std::vector<int>& houses, int index)
+{
+    int biggest_rob = 0;
+
+    for(unsigned long int i = index + 2; i < houses.size(); i++)
+    {
+        int rob_try = DP::houseRobber_recursive(houses, i);
+        if(rob_try > biggest_rob)
+            biggest_rob = rob_try;
+    }
+
+    return houses[index] + biggest_rob;
+}
+
+int DP::houseRobber_recursive_driver(std::vector<int>& nums)
+{
+    int biggest_rob = 0;
+
+    for(unsigned long int i = 0; i < nums.size(); i++)
+    {
+        int rob_try = DP::houseRobber_recursive(nums, i);
+        if(rob_try > biggest_rob)
+            biggest_rob = rob_try;
+    }
+
+    return biggest_rob;
+}
+
+/*
+In this case, optimized approach should be tabulation driven, as the problem is intrinsically bottom-up solvable.
+*/
+int DP::houseRobber_tabulation(std::vector<int>& houses, int index, std::vector<int>& known_values)
+{
+    if(known_values[index] == -1)
+    {
+        known_values[index] = 0;
+        for(unsigned long int i = index + 2; i < houses.size(); i++)
+        {
+            int rob_try = DP::houseRobber_tabulation(houses, i, known_values);
+            if(rob_try > known_values[index])
+                known_values[index] = rob_try;
+        }
+    }
+
+    return houses[index] + known_values[index];
+}
+
+int DP::houseRobber_tabulation_driver(std::vector<int>& nums)
+{
+    int biggest_rob = 0;
+
+    std::vector<int> known_values(nums.size(), -1);
+
+    for(unsigned long int i = 0; i < nums.size(); i++)
+    {
+        int rob_try = DP::houseRobber_tabulation(nums, i, known_values);
+        if(rob_try > biggest_rob)
+            biggest_rob = rob_try;
+    }
+
+    return biggest_rob;
+}
