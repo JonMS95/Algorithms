@@ -234,3 +234,43 @@ std::vector<int> DP::getNumOfOnes_tabulation(int n)
 
     return nums;
 }
+
+/*
+Let's see another example now: climbing stairs (based on https://leetcode.com/problems/climbing-stairs/description/).
+Same as in prior examples, we shall start by coming up with a recursive solution to build some intuition for further approaches.
+*/
+int DP::climbStairs_recursive(int n)
+{
+    if(n == 0)
+        return 1;
+    
+    if(n < 0)
+        return 0;
+    
+    return (DP::climbStairs_recursive(n - 1) + DP::climbStairs_recursive(n - 2));
+}
+
+/*
+Memoization approach: similar to what we have already seen while talking about geeting an arbitrary Fibonacci sequence number,
+many calculations can be avoided if they are stored in memory after they have been calculated for the first time. For instance,
+we know that there's only one way to get 1 step further (jumping a single level). Same goes for 2 steps: we can only jump once
+twice, or jump two levels above once (2 ways). So the proper approach here would be store those results and retrieve them
+later if necessary.
+Note that n == 0 is stored beforehand in the map we are about to use since it's the already known base case.
+*/
+int DP::climbStairs_memoization(int n, std::map<int, int>& known_cases)
+{
+    if(n < 0)
+        return 0;
+    
+    if(!known_cases.count(n))
+        known_cases[n] = DP::climbStairs_memoization(n - 1, known_cases) + DP::climbStairs_memoization(n - 2, known_cases);
+    
+    return known_cases[n];
+}
+
+int DP::climbStairs_memoization_driver(int n)
+{
+    std::map<int, int> known_cases = {{0, 1}};
+    return DP::climbStairs_memoization(n, known_cases);
+}
