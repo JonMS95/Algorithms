@@ -2,6 +2,7 @@
 #define DP_HPP
 
 #include <vector>
+#include <map>
 
 class DP
 {
@@ -20,6 +21,10 @@ public:
     static int getNumOfOnes_memoization(int n, std::vector<int>& known_values);
     static std::vector<int> countBits_memoization(int n);
     static std::vector<int> getNumOfOnes_tabulation(int n);
+
+    static int climbStairs_recursive(int n);
+    static int climbStairs_memoization(int n, std::map<int, int>& known_cases);
+    static int climbStairs_memoization_driver(int n);
 };
 
 #endif
